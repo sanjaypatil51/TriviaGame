@@ -1,4 +1,4 @@
-var count = 5
+var count = 20
 var questNumber = 0;
 var answered = 0
 var correct = 0
@@ -80,19 +80,23 @@ function decrement() {
         clearInterval(intervalId)
         $(".answers").attr("disabled", true)
         var question = questionBank[questNumber].quest
-        newDiv = $("<div>")
+        var newDiv = $("<div>")
         newDiv.addClass("embed-responsive embed-responsive-16by9")
         newDiv.append(answerbank[question][1])
         $(".card-text").append(newDiv)
         unanswered++
-        newDiv1 = `<h5 style="color: red;">Time's Up, correct answer is: ${answerbank[question][0]}</h5>`
+        var newDiv1 = `<h5 style="color: red;">Time's Up, correct answer is: ${answerbank[question][0]}</h5>`
         $(".card-text").append(newDiv1)
 
         setTimeout(function () {
             questNumber++
             if (questNumber < questionBank.length) {
-                count = 5
+                count = 20
+                $(".timeremain").html(`<h2 class="text-center">Time Remaining: 20sec</h2>`)
                 run()
+            }
+            else {
+                showResult()
             }
 
         }, 4000);
@@ -107,9 +111,21 @@ function setQuestion() {
     $(".card-title").text(questionBank[questNumber].quest)
     $(".card-text").empty()
     for (i = 0; i < questionBank[0].answ.length; i++) {
-        newDiv = `<div><input class="answers" type="radio" name="answer" value="${questionBank[questNumber].answ[i]}"> ${questionBank[questNumber].answ[i]}</div>`
+        var newDiv = `<div><input class="answers" type="radio" name="answer" value="${questionBank[questNumber].answ[i]}"> ${questionBank[questNumber].answ[i]}</div>`
         $(".card-text").append(newDiv)
     }
+
+}
+
+function showResult() {
+    $(".card-text").empty()
+    $(".card-body").html(`<h5 class="text-center" style="color: red; font:bold;"> Score</h5>`)
+    var newDiv = `<h6 class="text-center" style="color: blue;">Answered: ${answered}</h6>
+    <h6 class="text-center" style="color: blue;">Unanswered: ${unanswered}</h6>
+    <h6 class="text-center" style="color: blue;">Correct: ${correct}</h6>
+    <h6 class="text-center" style="color: blue;">Wrong: ${correct}</h6>`
+    
+    $(".card-body").append(newDiv)
 
 }
 
@@ -126,18 +142,22 @@ $(".card-text").click(function (event) {
     if ($(event.target).attr("value") == answerbank[question][0] && vType == "radio") {
         //$(".card-text").empty()   
         $(".answers").attr("disabled", true)
-        newDiv = $("<div>")
+        var newDiv = $("<div>")
         newDiv.addClass("embed-responsive embed-responsive-16by9")
         newDiv.append(answerbank[question][1])
         $(".card-text").append(newDiv)
         correct++
-        newDiv1 = `<h5 style="color: red;">Your Answer is correct</h5>`
+        var newDiv1 = `<h5 style="color: red;">Your Answer is correct</h5>`
         $(".card-text").append(newDiv1)
         setTimeout(function () {
             questNumber++
             if (questNumber < questionBank.length) {
-                count = 5
+                count = 20
+                $(".timeremain").html(`<h2 class="text-center">Time Remaining: 20sec</h2>`)
                 run()
+            }
+            else {
+                showResult()
             }
 
         }, 4000);
@@ -146,18 +166,22 @@ $(".card-text").click(function (event) {
     else if ($(event.target).attr("value") != answerbank[question][0] && vType == "radio") {
         //$(".card-text").empty()   
         $(".answers").attr("disabled", true)
-        newDiv = $("<div>")
+        var newDiv = $("<div>")
         newDiv.addClass("embed-responsive embed-responsive-16by9")
         newDiv.append(answerbank[question][1])
         $(".card-text").append(newDiv)
         wrong++
-        newDiv1 = `<h5 style="color: red;">Your Answer is wrong, correct answer is: ${answerbank[question][0]}</h5>`
+        var newDiv1 = `<h5 style="color: red;">Your Answer is wrong, correct answer is: ${answerbank[question][0]}</h5>`
         $(".card-text").append(newDiv1)
         setTimeout(function () {
             questNumber++
             if (questNumber < questionBank.length) {
-                count = 5
+                count = 20
+                $(".timeremain").html(`<h2 class="text-center">Time Remaining: 20sec</h2>`)
                 run()
+            }
+            else {
+                showResult()
             }
 
         }, 4000);
