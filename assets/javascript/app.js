@@ -42,9 +42,9 @@ function decrement() {
 }
 
 function setQuestion(questnum){
-  $(".card-title").text(questionBank[0].quest)
+  $(".card-title").text(questionBank[questnum].quest)
   for (i=0;i<questionBank[0].answ.length;i++){
-      newDiv=`<div><input type="radio" name="answer" value=${questionBank[0].answ[i]}> ${questionBank[0].answ[i]}</div>`
+      newDiv=`<div><input type="radio" name="answer" value=${questionBank[questnum].answ[i]}> ${questionBank[questnum].answ[i]}</div>`
       $(".card-text").append(newDiv)
   }
 
@@ -52,12 +52,20 @@ function setQuestion(questnum){
 
 $(".card-text").click(function(event){
    console.log($(event.target).attr("value"))
-   var question=questionBank[0].quest
+   var question=questionBank[questnum].quest
    //console.log(question)
    console.log(answerbank[question][0])
    
    if ($(event.target).attr("value")==answerbank[question][0]){
-       alert("winner")
+
+    newDiv=$("<div>")
+    newDiv.addClass("embed-responsive embed-responsive-16by9") 
+    newDiv.append (answerbank[question][1])  
+    $(".card-text").append(newDiv)
+    setTimeout(function () {
+        alert("Correct Answer")
+        
+    }, 1000);
 
    }
 
