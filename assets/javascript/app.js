@@ -14,6 +14,31 @@ var questionBank = [{
     quest: 'Who were Tim and Jill Taylor\'s kids on "Home Improvement"?',
     answ: ["Brian, Ray and Mike", "Bobby, Ryan and Matt", "Brad, Randy and Mark"]
 
+},
+{
+    quest: "On which kids' show did the character Pierre Escargot appear?",
+    answ: ["All That", "The Mickey Mouse Club", "The Ren & Stimpy Show"]
+},
+{
+    quest: 'Which TV show theme song had the following opening line? "Whatever happened to predictability?',
+    answ: ["Full House", "Step by Step", "Sister Sister"]
+},
+{
+    quest:'On "Beverly Hills, 90210," the entire high school rallies to ensure this character graduates.',
+    answ:["Kellie Taylor","Donna Martin","Brenda Walsh"]
+},
+{
+    quest:'Where is "Dawson\'s Creek" set?',
+    answ:["Wilmington, North Carolina","Capeside, Massachusetts","Montauk, New York"]
+},
+{
+    quest:'What is Bart Simpson\'s full name?',
+    answ:["Bartemius Crouch Simpson","Bartholomew JoJo Simpson","Bart Simpson"]
+},
+{
+    quest:'"Wannabe" was the Spice Girls\' first single. What was the second?',
+    answ:["2 Become 1","Say You'll Be There","Who Do You Think You Are"]
+
 }
 ]
 
