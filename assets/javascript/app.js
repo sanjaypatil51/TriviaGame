@@ -66,8 +66,7 @@ var answerbank = {
 
 //main run function
 function run() {
-    intervalId = setInterval(decrement, 1000);
-    shuffle()
+    intervalId = setInterval(decrement, 1000);    
     setQuestion()
 
 
@@ -208,4 +207,5 @@ $(".card-text").click(function (event) {
 
 )
 //run program
+shuffle()
 run()
