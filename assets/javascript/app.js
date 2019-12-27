@@ -1,4 +1,5 @@
 var count = 30
+var questNumber=0;
 
 var questionBank = [{
     quest: 'Who was the butler on "The Fresh Prince of Bel Air"?',
@@ -17,12 +18,13 @@ var questionBank = [{
 ]
 
 var answerbank={
-    'Who was the butler on "The Fresh Prince of Bel Air"?':"Geoffrey"
+    "Who was the butler on \"The Fresh Prince of Bel Air\"?":["Geoffrey",'<iframe src="https://www.youtube.com/embed/q21XFCR8cM4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>']
 }
 
 function run() {
     intervalId = setInterval(decrement, 1000);
-    setQuestion()
+    setQuestion(questNumber)
+    
     
 }
 
@@ -39,7 +41,7 @@ function decrement() {
 
 }
 
-function setQuestion(){
+function setQuestion(questnum){
   $(".card-title").text(questionBank[0].quest)
   for (i=0;i<questionBank[0].answ.length;i++){
       newDiv=`<div><input type="radio" name="answer" value=${questionBank[0].answ[i]}> ${questionBank[0].answ[i]}</div>`
@@ -50,6 +52,14 @@ function setQuestion(){
 
 $(".card-text").click(function(event){
    console.log($(event.target).attr("value"))
+   var question=questionBank[0].quest
+   //console.log(question)
+   console.log(answerbank[question][0])
+   
+   if ($(event.target).attr("value")==answerbank[question][0]){
+       alert("winner")
+
+   }
 
 })
 
