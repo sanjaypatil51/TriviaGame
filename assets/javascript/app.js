@@ -132,12 +132,13 @@ function setQuestion() {
 
 //show result after the run
 function showResult() {
+    $(".timeremain").html(`<h2 class="text-center">Time Remaining: 0sec</h2>`)
     $(".card-text").empty()
     $(".card-body").html(`<h5 class="text-center" style="color: red; font:bold;"> Score</h5>`)
     var newDiv = `<h6 class="text-center" style="color: blue;">Answered: ${answered}</h6>
     <h6 class="text-center" style="color: blue;">Unanswered: ${unanswered}</h6>
     <h6 class="text-center" style="color: blue;">Correct: ${correct}</h6>
-    <h6 class="text-center" style="color: blue;">Wrong: ${correct}</h6>`
+    <h6 class="text-center" style="color: blue;">Wrong: ${wrong}</h6>`
 
     $(".card-body").append(newDiv)
 
