@@ -35,17 +35,17 @@ function decrement() {
 
     $(".timeremain").html(`<h2 class="text-center">Time Remaining: ${count}sec</h2>`)
     if (count == 0) {
-        clearInterval(intervalId)  
-        var question = questionBank[questNumber].quest      
+        clearInterval(intervalId)
+        var question = questionBank[questNumber].quest
         newDiv = $("<div>")
         newDiv.addClass("embed-responsive embed-responsive-16by9")
         newDiv.append(answerbank[question][1])
         $(".card-text").append(newDiv)
         setTimeout(function () {
-            alert("Time Up, correct answer is:"+ answerbank[question][0])
+            alert("Time Up, correct answer is:" + answerbank[question][0])
 
         }, 1000);
-        
+
 
     }
 
@@ -66,9 +66,9 @@ $(".card-text").click(function (event) {
     var question = questionBank[questNumber].quest
     //console.log(question)
     console.log(answerbank[question][0])
-
+    clearInterval(intervalId)
     if ($(event.target).attr("value") == answerbank[question][0]) {
-
+        $(".card-text").empty()
         newDiv = $("<div>")
         newDiv.addClass("embed-responsive embed-responsive-16by9")
         newDiv.append(answerbank[question][1])
@@ -80,13 +80,13 @@ $(".card-text").click(function (event) {
 
     }
     else {
-
+        $(".card-text").empty()
         newDiv = $("<div>")
         newDiv.addClass("embed-responsive embed-responsive-16by9")
         newDiv.append(answerbank[question][1])
         $(".card-text").append(newDiv)
         setTimeout(function () {
-            alert("Wrong Answer, correct answer is:"+ answerbank[question][0])
+            alert("Wrong Answer, correct answer is:" + answerbank[question][0])
 
         }, 1000);
 
