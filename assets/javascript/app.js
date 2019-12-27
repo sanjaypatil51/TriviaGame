@@ -5,6 +5,7 @@ var correct = 0
 var wrong = 0
 var unanswered = 0
 
+//questionbank declaration
 var questionBank = [{
     quest: 'Who was the butler on "The Fresh Prince of Bel Air"?',
     answ: ["Geoffrey", "Bertram", "Carlton"]
@@ -49,7 +50,7 @@ var questionBank = [{
     answ: ["98 Degrees", "Backstreet Boys", "NSYNC"]
 }
 ]
-
+//answers declaration
 var answerbank = {
     "Who was the butler on \"The Fresh Prince of Bel Air\"?": ["Geoffrey", '<iframe src="https://www.youtube.com/embed/q21XFCR8cM4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'],
     'What are the two types of playing discs in the game of pogs?': ["pogs and slammers", '<iframe src="https://www.youtube.com/embed/-iMBuAYvVsc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'],
@@ -63,6 +64,7 @@ var answerbank = {
     "Which '90s boy band featured Nick, Drew, Justin and Jeff?": ["98 Degrees", '<iframe src="https://www.youtube.com/embed/4gAsPT-vgeM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>']
 }
 
+//main run function
 function run() {
     intervalId = setInterval(decrement, 1000);
     shuffle()
@@ -80,7 +82,7 @@ function shuffle() {
     }
 }
 
-
+//counter decrement
 function decrement() {
 
     count--
@@ -117,6 +119,8 @@ function decrement() {
 
 }
 
+
+//set questions on screen
 function setQuestion() {
     $(".card-title").text(questionBank[questNumber].quest)
     $(".card-text").empty()
@@ -127,6 +131,7 @@ function setQuestion() {
 
 }
 
+//show result after the run
 function showResult() {
     $(".card-text").empty()
     $(".card-body").html(`<h5 class="text-center" style="color: red; font:bold;"> Score</h5>`)
@@ -139,6 +144,7 @@ function showResult() {
 
 }
 
+//after answer selection trigger
 $(".card-text").click(function (event) {
     clearInterval(intervalId)
     answered++
@@ -201,5 +207,5 @@ $(".card-text").click(function (event) {
 }
 
 )
-
+//run program
 run()
