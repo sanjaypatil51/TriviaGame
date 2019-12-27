@@ -65,9 +65,19 @@ var answerbank = {
 
 function run() {
     intervalId = setInterval(decrement, 1000);
+    shuffle()
     setQuestion()
 
 
+}
+//shuffle questionbank
+function shuffle() {
+    for (i = questionBank.length - 1; i > 0; i--) {
+        randomNum = Math.floor(Math.random() * (i + 1));
+        temp = questionBank[i];
+        questionBank[i] = questionBank[randomNum];
+        questionBank[randomNum] = temp
+    }
 }
 
 
@@ -124,7 +134,7 @@ function showResult() {
     <h6 class="text-center" style="color: blue;">Unanswered: ${unanswered}</h6>
     <h6 class="text-center" style="color: blue;">Correct: ${correct}</h6>
     <h6 class="text-center" style="color: blue;">Wrong: ${correct}</h6>`
-    
+
     $(".card-body").append(newDiv)
 
 }
