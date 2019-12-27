@@ -1,5 +1,9 @@
-var count = 30
+var count = 5
 var questNumber = 0;
+var answered = 0
+var correct = 0
+var wrong = 0
+var unanswered = 0
 
 var questionBank = [{
     quest: 'Who was the butler on "The Fresh Prince of Bel Air"?',
@@ -39,6 +43,10 @@ var questionBank = [{
     quest: '"Wannabe" was the Spice Girls\' first single. What was the second?',
     answ: ["2 Become 1", "Say You'll Be There", "Who Do You Think You Are"]
 
+},
+{
+    quest: "Which '90s boy band featured Nick, Drew, Justin and Jeff?",
+    answ: ["98 Degrees", "Backstreet Boys", "NSYNC"]
 }
 ]
 
@@ -47,7 +55,12 @@ var answerbank = {
     'What are the two types of playing discs in the game of pogs?': ["pogs and slammers", '<iframe src="https://www.youtube.com/embed/-iMBuAYvVsc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'],
     'Who were Tim and Jill Taylor\'s kids on "Home Improvement"?': ["Brad, Randy and Mark", '<iframe src="https://www.youtube.com/embed/SBZyLbwl5hQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'],
     "On which kids' show did the character Pierre Escargot appear?": ["All That", '<iframe src="https://www.youtube.com/embed/KU3RCJgAShw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'],
-
+    'Which TV show theme song had the following opening line? "Whatever happened to predictability?': ["Full House", '<iframe src="https://www.youtube.com/embed/TJsPgsYbFDg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'],
+    'On "Beverly Hills, 90210," the entire high school rallies to ensure this character graduates.': ["Donna Martin", '<iframe src="https://www.youtube.com/embed/iunYmHH0UNI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'],
+    'Where is "Dawson\'s Creek" set?': ["Capeside, Massachusetts", '<iframe src="https://www.youtube.com/embed/ntxG68WJzuA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'],
+    'What is Bart Simpson\'s full name?': ["Bartholomew JoJo Simpson", '<iframe src="https://www.youtube.com/embed/Xqog63KOANc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'],
+    '"Wannabe" was the Spice Girls\' first single. What was the second?': ["Say You'll Be There", '<iframe src="https://www.youtube.com/embed/9ro0FW9Qt-4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'],
+    "Which '90s boy band featured Nick, Drew, Justin and Jeff?": ["98 Degrees", '<iframe src="https://www.youtube.com/embed/4gAsPT-vgeM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>']
 }
 
 function run() {
@@ -71,10 +84,18 @@ function decrement() {
         newDiv.addClass("embed-responsive embed-responsive-16by9")
         newDiv.append(answerbank[question][1])
         $(".card-text").append(newDiv)
-        setTimeout(function () {
-            alert("Time Up, correct answer is:" + answerbank[question][0])
+        unanswered++
+        newDiv1 = `<h5 style="color: red;">Time's Up, correct answer is: ${answerbank[question][0]}</h5>`
+        $(".card-text").append(newDiv1)
 
-        }, 1000);
+        setTimeout(function () {
+            questNumber++
+            if (questNumber < questionBank.length) {
+                count = 5
+                run()
+            }
+
+        }, 4000);
 
 
     }
@@ -84,8 +105,9 @@ function decrement() {
 
 function setQuestion() {
     $(".card-title").text(questionBank[questNumber].quest)
+    $(".card-text").empty()
     for (i = 0; i < questionBank[0].answ.length; i++) {
-        newDiv = `<div><input class="answers" type="radio" name="answer" value=${questionBank[questNumber].answ[i]}> ${questionBank[questNumber].answ[i]}</div>`
+        newDiv = `<div><input class="answers" type="radio" name="answer" value="${questionBank[questNumber].answ[i]}"> ${questionBank[questNumber].answ[i]}</div>`
         $(".card-text").append(newDiv)
     }
 
@@ -93,37 +115,52 @@ function setQuestion() {
 
 $(".card-text").click(function (event) {
     clearInterval(intervalId)
-    //console.log($(event.target).attr("value"))
+    answered++
+    console.log($(event.target).attr("value"))
     var question = questionBank[questNumber].quest
-    var vType=$(event.target).attr("type")
+    var vType = $(event.target).attr("type")
     //console.log(vType)
-    //console.log(answerbank[question][0])
-    
+    console.log(answerbank[question][0])
 
-    if ($(event.target).attr("value") == answerbank[question][0] && vType=="radio") {
+
+    if ($(event.target).attr("value") == answerbank[question][0] && vType == "radio") {
         //$(".card-text").empty()   
-        $(".answers").attr("disabled", true)     
+        $(".answers").attr("disabled", true)
         newDiv = $("<div>")
         newDiv.addClass("embed-responsive embed-responsive-16by9")
         newDiv.append(answerbank[question][1])
         $(".card-text").append(newDiv)
+        correct++
+        newDiv1 = `<h5 style="color: red;">Your Answer is correct</h5>`
+        $(".card-text").append(newDiv1)
         setTimeout(function () {
-            alert("Correct Answer")
+            questNumber++
+            if (questNumber < questionBank.length) {
+                count = 5
+                run()
+            }
 
-        }, 1000);
+        }, 4000);
 
     }
-    else if ($(event.target).attr("value") != answerbank[question][0] && vType=="radio") {
+    else if ($(event.target).attr("value") != answerbank[question][0] && vType == "radio") {
         //$(".card-text").empty()   
-        $(".answers").attr("disabled", true)    
+        $(".answers").attr("disabled", true)
         newDiv = $("<div>")
         newDiv.addClass("embed-responsive embed-responsive-16by9")
         newDiv.append(answerbank[question][1])
         $(".card-text").append(newDiv)
+        wrong++
+        newDiv1 = `<h5 style="color: red;">Your Answer is wrong, correct answer is: ${answerbank[question][0]}</h5>`
+        $(".card-text").append(newDiv1)
         setTimeout(function () {
-            alert("Wrong Answer, correct answer is:" + answerbank[question][0])
+            questNumber++
+            if (questNumber < questionBank.length) {
+                count = 5
+                run()
+            }
 
-        }, 1000);
+        }, 4000);
 
     }
 
